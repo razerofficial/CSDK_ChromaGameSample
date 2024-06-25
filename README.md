@@ -69,7 +69,7 @@ To use the Chroma SDK first install the new [Razer Synapse and Chroma App](https
 
 ## About
 
-The `C++ Game Sample App` is a C++ console app that can be used as a template intended to work with the automated [Chroma Design Converter](https://github.com/razerofficial/ChromaDesignConverter) for quickly porting sample effects from HTML5 to C++. The referenced sample script can be found at [Assets/Scripts/Sample.cpp](Assets/Scripts/Sample.cpp). Chroma Design samples are commonly created with 15 sample effects which is why the template has that many options to play the sample effects from the ported code. The Chroma Design Converter is not limited to just 15 sample effects and can generate more effect code from the input HTML5 script.
+The `C++ Game Sample` is a C++ console app that can be used as a template intended to work with the automated [Chroma Design Converter](https://github.com/razerofficial/ChromaDesignConverter) for quickly porting sample effects from HTML5 to C++. The referenced sample script at [Sample.cpp](Sample.cpp). Chroma Design samples are commonly created with 15 sample effects which is why the template has that many options to play the sample effects from the ported code. The Chroma Design Converter is not limited to just 15 sample effects and can generate more effect code from the input HTML5 script.
 
 **Screenshot:**
 
