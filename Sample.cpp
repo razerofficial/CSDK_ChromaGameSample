@@ -479,6 +479,7 @@ void Cleanup()
 	{
 		if (ChromaAnimationAPI::IsInitialized())
 		{
+            ChromaAnimationAPI::UseIdleAnimations(false);
 			ChromaAnimationAPI::StopAll();
 			ChromaAnimationAPI::CloseAll();
 			RZRESULT result = ChromaAnimationAPI::Uninit();
