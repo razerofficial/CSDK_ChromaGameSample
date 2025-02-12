@@ -23,6 +23,7 @@
 * [Tools](#tools)
 * [Integration](#integration)
 * [Testing](#testing)
+* [Performance](#performance)
 * [Haptic Design](#haptic-design)
 * [Modding](#modding)
 * [General](#general)
@@ -74,6 +75,8 @@ To use the Chroma SDK first install the new [Razer Synapse and Chroma App](https
 The `C++ Game Sample` is a C++ console app that can be used as a template intended to work with the automated [Chroma Design Converter](https://github.com/razerofficial/ChromaDesignConverter) for quickly porting sample effects from HTML5 to C++. The referenced sample script at [Sample.cpp](Sample.cpp). Chroma Design samples are commonly created with 15 sample effects which is why the template has that many options to play the sample effects from the ported code. The Chroma Design Converter is not limited to just 15 sample effects and can generate more effect code from the input HTML5 script.
 
 **Screenshot:**
+
+**Console App**
 
 ![image_1](/images/image_1.png)
 
@@ -152,9 +155,11 @@ The SDK integration process involves the following:
 
 6. [Testing](#testing)
 
-7. [Haptic Design](#haptic-design)
+7. [Performance](#performance)
 
-8. [Modding](#modding)
+8. [Haptic Design](#haptic-design)
+
+9. [Modding](#modding)
 
 <a name="chroma-design"></a>
 
@@ -192,13 +197,122 @@ The developer specifies which game engine is used by the game so that a sample p
 
 ### Integration
 
-The integration process can be as easy as copy and paste from the sample project into the game code. Most likely, it's a matter of finding game triggers in the game code to find the optimal place to add a call to `PlayAnimation()`. The typical Chroma integration process lasts 3 - 5 days for a single developer. Haptics integration can take 0 days by using automatic mode. Manually adding haptics can take about the same amount of work as Chroma to add the calls to `SetEventName()` in the right places. Chroma and haptics are independent meaning sometimes they play together and sometimes they play separately, which is completely up to the designer. **In most cases for game engines after the game build completes, the Chroma animations need to be copied to the animation folder within the game's content folder.** Once the app has been built, the folder `GameSampleAnimations` present in the archive has to be copied in the root folder of the executable (i.e. x64\Release\ for a release build on x64)
+The integration process can be as easy as copy and paste from the sample project into the game code. Most likely, it's a matter of finding game triggers in the game code to find the optimal place to add a call to `PlayAnimation()`. The typical Chroma integration process lasts 3 - 5 days for a single developer. Haptics integration can take 0 days by using automatic mode. Manually adding haptics can take about the same amount of work as Chroma to add the calls to `SetEventName()` in the right places. Chroma and haptics are independent meaning sometimes they play together and sometimes they play separately, which is completely up to the designer. **In most cases for game engines after the game build completes, the Chroma animations need to be copied to the animation folder within the game's content folder.**
 
 <a name="testing"></a>
 
 ### Testing
 
 The team can provide QA on the game build when integration has completed. Steam beta keys and Epic Store beta keys make testing possible before a game launches. This can be a good way to provide design revisions by testing and giving feedback on the build. To support the QA process, it will be important to include a level selector and potentially console commands that make it easy to navigate the build to test the game triggers at the right moments to validate the visuals work as expected. Beta key access is limited to the engineering and QA review team.
+
+<a name="performance"></a>
+
+### Performance
+
+**Performance Considerations**
+
+`Avoid Blocking the Update/Rendering Thread:`
+
+Calling the Chroma API in the middle of an update or rendering thread can cause noticeable lag if not handled properly.
+ 
+`Two Approaches for Animation References:`
+
+* By ID (Synchronous):
+	* Methods that reference animations by ID are synchronous. These calls can block the thread they run on.
+	* Recommendation: Use a dedicated thread outside the main update/render thread if you plan to call by ID.
+* By Name (Asynchronous):
+	* Methods that reference animations by name have been modified to run in the background and return immediately.
+	* This design avoids any performance impact on the main thread.
+	* Recommendation: It is safe to call these methods directly from the main thread since they won’t block it.
+ 
+`SetEventName Details:`
+
+* `SetEventName` is asynchronous and rate-limited to 30 FPS.
+* Using `SetEventName` to add external Chroma or haptics is generally the best way to maximize performance.
+
+The following chart measures `SetEventName` calls per second with a unique number of events. The high framerate shows the method will have little performance impact with a large number of simultaneous events.
+
+![image_42](images/image_42.png)
+ 
+ `GetAnimation Behavior:`
+
+ * GetAnimation returns the ID of a loaded animation immediately or sends the operation to open the animation in the background if it’s not already loaded.
+ 
+`Preloading Animations:`
+ 
+ * If yor design calls for using PlayChromaAnimationName during update or rendering, preload animations during level loading to avoid runtime lag.
+
+Performance is a key concern when adding Chroma and haptics to event triggers. Calling the API in the middle of an update or rendering thread could cause noticable lag if designed incorrectly. Methods that reference animations by id are synchronous and may block the calling thread. Methods that reference animations by name have been modified to pass the operation to the background and return immediately to avoid any performance impact. `SetEventName` is asynchronous and is rate limited to 30 FPS. `GetAnimation` will return the id of a loaded animation immediately or send the open animation operation to the background. To maximize performance use `SetEventName` to add external Chroma and haptics to the game. Preload animations during the level loading stage when using `PlayChromaAnimationName` if the design calls from the update or rendering thread. Use a dedicated thread outside the update and rendering thread If you plan to reference animations by id.
+
+`Asynchronous Methods:`
+
+The following methods have been adapted to work in the background (asynchronously) and can be safely called from the main thread without causing performance bottlenecks.
+
+```
+AddNonZeroAllKeysAllFramesName
+AddNonZeroAllKeysName
+CloseAnimationName
+CopyKeyColorName
+CopyKeysColorAllFramesName
+CopyNonZeroAllKeysAllFramesName
+CopyNonZeroAllKeysName
+CopyNonZeroTargetAllKeysAllFramesName
+CoreStreamBroadcast
+CoreStreamBroadcastEnd
+CoreStreamGetAuthShortcode
+CoreStreamGetFocus
+CoreStreamGetId
+CoreStreamGetKey
+CoreStreamGetStatus
+CoreStreamReleaseShortcode
+CoreStreamSetFocus
+CoreStreamWatch
+CoreStreamWatchEnd
+DuplicateFirstFrameName
+DuplicateFramesName
+DuplicateMirrorFramesName
+FadeEndFramesName
+FadeStartFramesName
+FillRandomColorsBlackAndWhiteAllFramesName
+FillThresholdColorsAllFramesName
+FillThresholdColorsMinMaxAllFramesRGBName
+FillThresholdColorsRGBName
+FillZeroColorAllFramesRGBName
+GetAnimation
+InsertDelayName
+InvertColorsAllFramesName
+MakeBlankFramesName
+MakeBlankFramesRGBName
+MultiplyColorLerpAllFramesName
+MultiplyIntensityAllFramesName
+MultiplyIntensityAllFramesRGBName
+MultiplyIntensityColorName
+MultiplyIntensityName
+MultiplyIntensityRGBName
+MultiplyTargetColorLerpAllFramesName
+OverrideFrameDurationName
+PlayChromaAnimationName
+PreviewFrameName
+ReduceFramesName
+ReverseAllFramesName
+SetChromaCustomFlagName
+SetEventName
+SetIdleAnimationName
+SetKeyColorAllFramesName
+SetKeyColorName
+SetKeysColorAllFramesName
+SetKeysColorAllFramesRGBName
+StopAll
+StopAnimationName
+StopAnimationType
+SubtractNonZeroAllKeysAllFramesName
+SubtractNonZeroAllKeysName
+TrimEndFramesName
+TrimStartFramesName
+UseForwardChromaEvents
+UseIdleAnimation
+UseIdleAnimations
+```
 
 <a name="haptic-design"></a>
 
@@ -379,7 +493,7 @@ if (result == RZRESULT_SUCCESS)
     // Init Success! Ready to use the Chroma SDK!
 }
 else
- {
+{
     // Init Failed! Stop using the Chroma SDK until the next game launch!";
 }
 ```
@@ -406,7 +520,7 @@ Many applications and games can use the Chroma SDK at the same time, yet only on
 bool isActive;
 int result = ChromaAnimationAPI::IsActive(isActive);
 if (result == RZRESULT_SUCCESS)
- {
+{
     if (isActive)
     {
         // The game currently has the Chroma focus!
@@ -471,7 +585,7 @@ for (int i = 0; i < devices.size(); ++i)
 ## Set Event Name
  
 Chroma events can be named to add supplemental technology to your lighting experience. By naming game events and game triggers, the event name can be used as a lookup to play things like haptics effects. `SetEventName(L"Jump")` could be used when playing a Chroma animation of a jump effect. Using `L"Jump"` a corresponding haptic effect can be added with the Chroma effect to enhance emersion for the title. No other APIs are required to add haptics effects other than to invoke SetEventName(). To stop haptics playback use `SetEventName(L"")` with an empty string. A Chroma animation does not need to be playing in order to trigger haptics manually with SetEventName().
- 
+
 ```c++
 // Trigger haptic effect
 int result = ChromaAnimationAPI::CoreSetEventName(L"Jump");
@@ -497,7 +611,7 @@ else
 ```
 
 ## Use Forward Chroma Events
- 
+
 By default when PlayAnimation is called, the animation name is automatically sent to SetEventName(). In order to disable the default behaviour set the toggle to false. PlayAnimation() as shown above is called for each device category. It will be more efficent to use SetEventName() once for the Chroma animation set. Manual mode gives the title explicit control over when SetEventName() is called.
 
 ```c++
@@ -506,7 +620,7 @@ ChromaAnimationAPI::UseForwardChromaEvents(toggle);
 if (toggle)
 {
     // When PlayAnimation is used, the name is sent to SetEventName().
- }
+}
 else
 {
     // The PlayAnimation name is not forwarded.
