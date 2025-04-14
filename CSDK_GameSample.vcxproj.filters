@@ -48,6 +48,9 @@
     <ClInclude Include="Razer\VerifyLibrarySignature.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Razer\UnicodeChromaAnimationAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Razer\ChromaSDKPluginTypes.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Razer\VerifyLibrarySignature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Razer\UnicodeChromaAnimationAPI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

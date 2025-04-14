@@ -475,20 +475,17 @@ void ExecuteEffect(bool supportsStreaming, BYTE platform);
 
 void Cleanup()
 {
-	if (ChromaAnimationAPI::GetIsInitializedAPI())
+	if (ChromaAnimationAPI::IsInitialized())
 	{
-		if (ChromaAnimationAPI::IsInitialized())
+		ChromaAnimationAPI::UseIdleAnimations(false);
+		ChromaAnimationAPI::StopAll();
+		ChromaAnimationAPI::CloseAll();
+		RZRESULT result = ChromaAnimationAPI::Uninit();
+		ChromaAnimationAPI::UninitAPI();
+		if (result != RZRESULT_SUCCESS)
 		{
-			ChromaAnimationAPI::UseIdleAnimations(false);
-			ChromaAnimationAPI::StopAll();
-			ChromaAnimationAPI::CloseAll();
-			RZRESULT result = ChromaAnimationAPI::Uninit();
-			ChromaAnimationAPI::UninitAPI();
-			if (result != RZRESULT_SUCCESS)
-			{
-				cerr << "Failed to uninitialize Chroma! Result=" << result << endl;
-				exit(1);
-			}
+			cerr << "Failed to uninitialize Chroma! Result=" << result << endl;
+			exit(1);
 		}
 	}
 }
@@ -496,10 +493,6 @@ void Cleanup()
 int main()
 {
 	fprintf(stderr, "App launched!\r\n");
-	if (ChromaAnimationAPI::InitAPI() != RZRESULT_SUCCESS)
-	{
-		return -1;
-	}
 
 	ChromaSDK::APPINFOTYPE appInfo = {};
 
