@@ -22,286 +22,61 @@ void ShowEffect1()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect1");
 }
-void ShowEffect1ChromaLink()
-{
-}
-void ShowEffect1Headset()
-{
-}
-void ShowEffect1Mousepad()
-{
-}
-void ShowEffect1Mouse()
-{
-}
-void ShowEffect1Keypad()
-{
-}
 void ShowEffect2()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect2");
-}
-void ShowEffect2ChromaLink()
-{
-}
-void ShowEffect2Headset()
-{
-}
-void ShowEffect2Mousepad()
-{
-}
-void ShowEffect2Mouse()
-{
-}
-void ShowEffect2Keypad()
-{
 }
 void ShowEffect3()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect3");
 }
-void ShowEffect3ChromaLink()
-{
-}
-void ShowEffect3Headset()
-{
-}
-void ShowEffect3Mousepad()
-{
-}
-void ShowEffect3Mouse()
-{
-}
-void ShowEffect3Keypad()
-{
-}
 void ShowEffect4()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect4");
-}
-void ShowEffect4ChromaLink()
-{
-}
-void ShowEffect4Headset()
-{
-}
-void ShowEffect4Mousepad()
-{
-}
-void ShowEffect4Mouse()
-{
-}
-void ShowEffect4Keypad()
-{
 }
 void ShowEffect5()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect5");
 }
-void ShowEffect5ChromaLink()
-{
-}
-void ShowEffect5Headset()
-{
-}
-void ShowEffect5Mousepad()
-{
-}
-void ShowEffect5Mouse()
-{
-}
-void ShowEffect5Keypad()
-{
-}
 void ShowEffect6()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect6");
-}
-void ShowEffect6ChromaLink()
-{
-}
-void ShowEffect6Headset()
-{
-}
-void ShowEffect6Mousepad()
-{
-}
-void ShowEffect6Mouse()
-{
-}
-void ShowEffect6Keypad()
-{
 }
 void ShowEffect7()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect7");
 }
-void ShowEffect7ChromaLink()
-{
-}
-void ShowEffect7Headset()
-{
-}
-void ShowEffect7Mousepad()
-{
-}
-void ShowEffect7Mouse()
-{
-}
-void ShowEffect7Keypad()
-{
-}
 void ShowEffect8()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect8");
-}
-void ShowEffect8ChromaLink()
-{
-}
-void ShowEffect8Headset()
-{
-}
-void ShowEffect8Mousepad()
-{
-}
-void ShowEffect8Mouse()
-{
-}
-void ShowEffect8Keypad()
-{
 }
 void ShowEffect9()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect9");
 }
-void ShowEffect9ChromaLink()
-{
-}
-void ShowEffect9Headset()
-{
-}
-void ShowEffect9Mousepad()
-{
-}
-void ShowEffect9Mouse()
-{
-}
-void ShowEffect9Keypad()
-{
-}
 void ShowEffect10()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect10");
-}
-void ShowEffect10ChromaLink()
-{
-}
-void ShowEffect10Headset()
-{
-}
-void ShowEffect10Mousepad()
-{
-}
-void ShowEffect10Mouse()
-{
-}
-void ShowEffect10Keypad()
-{
 }
 void ShowEffect11()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect11");
 }
-void ShowEffect11ChromaLink()
-{
-}
-void ShowEffect11Headset()
-{
-}
-void ShowEffect11Mousepad()
-{
-}
-void ShowEffect11Mouse()
-{
-}
-void ShowEffect11Keypad()
-{
-}
 void ShowEffect12()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect12");
-}
-void ShowEffect12ChromaLink()
-{
-}
-void ShowEffect12Headset()
-{
-}
-void ShowEffect12Mousepad()
-{
-}
-void ShowEffect12Mouse()
-{
-}
-void ShowEffect12Keypad()
-{
 }
 void ShowEffect13()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect13");
 }
-void ShowEffect13ChromaLink()
-{
-}
-void ShowEffect13Headset()
-{
-}
-void ShowEffect13Mousepad()
-{
-}
-void ShowEffect13Mouse()
-{
-}
-void ShowEffect13Keypad()
-{
-}
 void ShowEffect14()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect14");
 }
-void ShowEffect14ChromaLink()
-{
-}
-void ShowEffect14Headset()
-{
-}
-void ShowEffect14Mousepad()
-{
-}
-void ShowEffect14Mouse()
-{
-}
-void ShowEffect14Keypad()
-{
-}
 void ShowEffect15()
 {
 	ChromaAnimationAPI::CoreSetEventName(L"Effect15");
-}
-void ShowEffect15ChromaLink()
-{
-}
-void ShowEffect15Headset()
-{
-}
-void ShowEffect15Mousepad()
-{
-}
-void ShowEffect15Mouse()
-{
-}
-void ShowEffect15Keypad()
-{
 }
 #pragma endregion
 
@@ -801,123 +576,48 @@ void ExecuteEffect(bool supportsStreaming, BYTE platform)
 		break;
 	case 1:
 		ShowEffect1();
-		ShowEffect1ChromaLink();
-		ShowEffect1Headset();
-		ShowEffect1Keypad();
-		ShowEffect1Mousepad();
-		ShowEffect1Mouse();
 		break;
 	case 2:
 		ShowEffect2();
-		ShowEffect2ChromaLink();
-		ShowEffect2Headset();
-		ShowEffect2Keypad();
-		ShowEffect2Mousepad();
-		ShowEffect2Mouse();
 		break;
 	case 3:
 		ShowEffect3();
-		ShowEffect3ChromaLink();
-		ShowEffect3Headset();
-		ShowEffect3Keypad();
-		ShowEffect3Mousepad();
-		ShowEffect3Mouse();
 		break;
 	case 4:
 		ShowEffect4();
-		ShowEffect4ChromaLink();
-		ShowEffect4Headset();
-		ShowEffect4Keypad();
-		ShowEffect4Mousepad();
-		ShowEffect4Mouse();
 		break;
 	case 5:
 		ShowEffect5();
-		ShowEffect5ChromaLink();
-		ShowEffect5Headset();
-		ShowEffect5Keypad();
-		ShowEffect5Mousepad();
-		ShowEffect5Mouse();
 		break;
 	case 6:
 		ShowEffect6();
-		ShowEffect6ChromaLink();
-		ShowEffect6Headset();
-		ShowEffect6Keypad();
-		ShowEffect6Mousepad();
-		ShowEffect6Mouse();
 		break;
 	case 7:
 		ShowEffect7();
-		ShowEffect7ChromaLink();
-		ShowEffect7Headset();
-		ShowEffect7Keypad();
-		ShowEffect7Mousepad();
-		ShowEffect7Mouse();
 		break;
 	case 8:
 		ShowEffect8();
-		ShowEffect8ChromaLink();
-		ShowEffect8Headset();
-		ShowEffect8Keypad();
-		ShowEffect8Mousepad();
-		ShowEffect8Mouse();
 		break;
 	case 9:
 		ShowEffect9();
-		ShowEffect9ChromaLink();
-		ShowEffect9Headset();
-		ShowEffect9Keypad();
-		ShowEffect9Mousepad();
-		ShowEffect9Mouse();
 		break;
 	case 10:
 		ShowEffect10();
-		ShowEffect10ChromaLink();
-		ShowEffect10Headset();
-		ShowEffect10Keypad();
-		ShowEffect10Mousepad();
-		ShowEffect10Mouse();
 		break;
 	case 11:
 		ShowEffect11();
-		ShowEffect11ChromaLink();
-		ShowEffect11Headset();
-		ShowEffect11Keypad();
-		ShowEffect11Mousepad();
-		ShowEffect11Mouse();
 		break;
 	case 12:
 		ShowEffect12();
-		ShowEffect12ChromaLink();
-		ShowEffect12Headset();
-		ShowEffect12Keypad();
-		ShowEffect12Mousepad();
-		ShowEffect12Mouse();
 		break;
 	case 13:
 		ShowEffect13();
-		ShowEffect13ChromaLink();
-		ShowEffect13Headset();
-		ShowEffect13Keypad();
-		ShowEffect13Mousepad();
-		ShowEffect13Mouse();
 		break;
 	case 14:
 		ShowEffect14();
-		ShowEffect14ChromaLink();
-		ShowEffect14Headset();
-		ShowEffect14Keypad();
-		ShowEffect14Mousepad();
-		ShowEffect14Mouse();
 		break;
 	case 15:
 		ShowEffect15();
-		ShowEffect15ChromaLink();
-		ShowEffect15Headset();
-		ShowEffect15Keypad();
-		ShowEffect15Mousepad();
-		ShowEffect15Mouse();
 		break;
 	}
 
